@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".LoginActivity"
+    android:background="@drawable/gradient_background">
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:layout_gravity="center_vertical"
+    tools:ignore="ScrollViewSize">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/ic_undraw_secure_login_pdn4"
+        android:layout_marginTop="@dimen/margin_default"
+        android:layout_marginLeft="@dimen/margin_default"
+        android:layout_marginRight="@dimen/margin_default" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome"
+        android:layout_marginStart="@dimen/margin_default"
+        android:layout_marginEnd="@dimen/margin_default"
+        android:layout_marginTop="@dimen/margin_activity_small"
+        android:textColor="@color/colorWhite"
+        android:textSize="26sp"
+        android:textStyle="bold"
+
+        />
+
+    <EditText
+        android:hint="Personal Number"
+        android:paddingLeft="@dimen/margin_default"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:inputType="text"
+        android:layout_marginTop="@dimen/margin_default"
+        android:background="@drawable/input"
+        android:layout_marginStart="@dimen/margin_default"
+        android:layout_marginEnd="@dimen/margin_default"
+        android:textColorHint="#ACABAB"
+        android:id="@+id/edt_number"
+        android:textColor="@color/colorWhite"
+        tools:ignore="HardcodedText,RtlHardcoded,RtlSymmetry,TextFields"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/edt_password"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:textColor="@color/colorWhite"
+        android:layout_marginStart="@dimen/margin_default"
+        android:layout_marginTop="@dimen/margin_default"
+        android:layout_marginEnd="@dimen/margin_default"
+        android:background="@drawable/input"
+        android:hint="Password"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        android:paddingLeft="@dimen/margin_default"
+        android:textColorHint="#ACABAB"
+        tools:ignore="HardcodedText,RtlHardcoded,RtlSymmetry,TextFields" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/btn_login"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="@dimen/margin_default"
+            android:layout_marginTop="@dimen/margin_default"
+            tools:ignore="ContentDescription,HardcodedText,RelativeOverlap,RtlCompat,RtlHardcoded"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/bg_btnlogin"
+            android:src="@drawable/ic_baseline_arrow_forward_24"
+            android:textSize="24sp"
+            android:textColor="@color/white"
+            />
+    </RelativeLayout>
+    </LinearLayout>
+</ScrollView>
