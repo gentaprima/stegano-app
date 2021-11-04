@@ -25,18 +25,13 @@ public class LoginRepository {
         requestOrder.enqueue(new Callback<ResponseLogin>() {
             @Override
             public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
-                try {
+                System.out.println(response.body());
+                if(response.body() != null){
 
-                    System.out.println(response.body());
-                }catch (Exception e){
-                    Log.d("s",e.getMessage());
+                    responseLoginMutableLiveData.postValue(response.body());
+                }else{
+                    responseLoginMutableLiveData.postValue(null);
                 }
-//                if(response.body() != null){
-//
-//                    responseLoginMutableLiveData.postValue(response.body());
-//                }else{
-//                    responseLoginMutableLiveData.postValue(null);
-//                }
             }
 
             @Override
