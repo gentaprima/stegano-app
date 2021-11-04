@@ -2,4 +2,9 @@
     <string name="app_name">SteganoApp</string>
     <string name="welcome">Welcome</string>
     <string name="silahkan_tunggu">Silahkan Tunggu ...</string>
+    <string name="embed">embed</string>
+    <string name="extrack">extrack</string>
+    <string name="logout">logout</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -16,6 +16,7 @@ public class LoginViewModel extends ViewModel {
 
     public void setLogin(String number,String password){
         userEntityLiveData =loginRepository.getResponseLogin(number,password);
+
     }
 
     public LiveData<ResponseLogin> getUserEntityLiveData(){

@@ -8,7 +8,7 @@ public class ApiClient {
 
     public  static  Retrofit getClient(){
         if(retrofit == null){
-            retrofit = new Retrofit.Builder().baseUrl("http://192.168.0.4/steganografi-api/")
+            retrofit = new Retrofit.Builder().baseUrl("http://192.168.0.5/steganografi/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
