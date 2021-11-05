@@ -3,12 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/project/stegano-app/app/src/main/res/drawable/border_input.xml" value="0.2942708333333333" />
         <entry key="..\:/project/stegano-app/app/src/main/res/drawable/ic_logout.xml" value="0.2703125" />
         <entry key="..\:/project/stegano-app/app/src/main/res/drawable/ic_logout_svgrepo_com.xml" value="0.2703125" />
         <entry key="..\:/project/stegano-app/app/src/main/res/drawable/ic_undraw_secure_login_pdn4.xml" value="0.2703125" />
-        <entry key="..\:/project/stegano-app/app/src/main/res/layout/activity_embedding.xml" value="0.33" />
+        <entry key="..\:/project/stegano-app/app/src/main/res/drawable/input_without_border.xml" value="0.2942708333333333" />
+        <entry key="..\:/project/stegano-app/app/src/main/res/layout/activity_embedding.xml" value="0.18" />
         <entry key="..\:/project/stegano-app/app/src/main/res/layout/activity_home.xml" value="0.33" />
         <entry key="..\:/project/stegano-app/app/src/main/res/layout/app_bar.xml" value="0.371875" />
+        <entry key="..\:/project/stegano-app/app/src/main/res/layout/fragment_embedding_menu.xml" value="0.25" />
       </map>
     </option>
   </component>
