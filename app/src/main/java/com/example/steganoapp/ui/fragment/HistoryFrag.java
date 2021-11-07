@@ -1,4 +1,4 @@
-package com.example.steganoapp.ui.menu;
+package com.example.steganoapp.ui.fragment;
 
 import android.os.Bundle;
 
@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.steganoapp.R;
 
-public class HistoryMenu extends Fragment {
+public class HistoryFrag extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

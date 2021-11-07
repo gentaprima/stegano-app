@@ -1,5 +1,5 @@
 package com.example.steganoapp.impl;
 
-public interface LoginImpl {
+public interface ILogin {
     void login();
 }

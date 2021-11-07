@@ -7,15 +7,12 @@ import androidx.lifecycle.ViewModelProviders;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.steganoapp.R;
-import com.example.steganoapp.impl.LoginImpl;
 import com.example.steganoapp.model.login.ResponseLogin;
 import com.example.steganoapp.session.SystemDataLocal;
 import com.example.steganoapp.ui.HomeActivity;

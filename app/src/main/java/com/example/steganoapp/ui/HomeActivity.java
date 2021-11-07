@@ -6,8 +6,6 @@ import androidx.cardview.widget.CardView;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.steganoapp.R;
@@ -38,7 +36,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btn_embed:
-                SwitchActivity.mainSwitch(this,Embedding.class);
+                SwitchActivity.mainSwitch(this, EmbeddingActivity.class);
                 break;
             default:
                 break;
