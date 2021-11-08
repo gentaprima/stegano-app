@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.steganoapp.R;
 import com.example.steganoapp.session.SystemDataLocal;
+import com.example.steganoapp.ui.users.ProfileActivity;
 import com.example.steganoapp.utils.SwitchActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -17,7 +18,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView tvName;
-    CardView cardEmbed;
+    CardView cardEmbed,cardExtraction;
     CircleImageView ivProfile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         ivProfile = findViewById(R.id.iv_profile);
         cardEmbed = findViewById(R.id.btn_embed);
         cardEmbed.setOnClickListener(this);
+        cardExtraction = findViewById(R.id.cardExtraction);
+        cardExtraction.setOnClickListener(this);
         tvName.setText(systemDataLocal.getLoginData().getName());
+        ivProfile.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -37,6 +41,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()){
             case R.id.btn_embed:
                 SwitchActivity.mainSwitch(this, EmbeddingActivity.class);
+                break;
+
+            case R.id.cardExtraction:
+                SwitchActivity.mainSwitch(this,ExtractionActivity.class);
+                break;
+
+            case R.id.iv_profile:
+                SwitchActivity.mainSwitch(this, ProfileActivity.class);
                 break;
             default:
                 break;

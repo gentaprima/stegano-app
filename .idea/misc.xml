@@ -3,6 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/genta/AndroidStudioProjects/SteganoApp/app/src/main/res/layout/activity_embedding.xml" value="0.209375" />
+        <entry key="..\:/Users/genta/AndroidStudioProjects/SteganoApp/app/src/main/res/layout/activity_extraction.xml" value="0.1953125" />
+        <entry key="..\:/Users/genta/AndroidStudioProjects/SteganoApp/app/src/main/res/layout/activity_home.xml" value="0.209375" />
+        <entry key="..\:/Users/genta/AndroidStudioProjects/SteganoApp/app/src/main/res/layout/activity_main.xml" value="0.209375" />
+        <entry key="..\:/Users/genta/AndroidStudioProjects/SteganoApp/app/src/main/res/layout/activity_profile.xml" value="0.25" />
+        <entry key="..\:/Users/genta/AndroidStudioProjects/SteganoApp/app/src/main/res/layout/fragment_embedding_menu.xml" value="0.209375" />
+        <entry key="..\:/Users/genta/AndroidStudioProjects/SteganoApp/app/src/main/res/layout/fragment_extraction.xml" value="0.209375" />
         <entry key="..\:/project/stegano-app/app/src/main/res/drawable/bg_btnlogin.xml" value="0.19087837837837837" />
         <entry key="..\:/project/stegano-app/app/src/main/res/drawable/bg_home.xml" value="0.19087837837837837" />
         <entry key="..\:/project/stegano-app/app/src/main/res/drawable/border_input.xml" value="0.2942708333333333" />
@@ -20,7 +27,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
