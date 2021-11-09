@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.steganoapp.model.login.ResponseLogin;
-import com.example.steganoapp.network.repository.users.LoginRepository;
+import com.example.steganoapp.network.repository.login.LoginRepository;
 
 public class LoginViewModel extends ViewModel {
     private LoginRepository loginRepository;

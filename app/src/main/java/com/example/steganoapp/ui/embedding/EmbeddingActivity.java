@@ -1,4 +1,4 @@
-package com.example.steganoapp.ui;
+package com.example.steganoapp.ui.embedding;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -31,6 +31,7 @@ public class EmbeddingActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Embedding"));
         tabLayout.addTab(tabLayout.newTab().setText("History"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
         final TabViewPager tabViewPager = new TabViewPager(getSupportFragmentManager(),this);
         viewPager.setAdapter(tabViewPager);
         tabLayout.setupWithViewPager(viewPager);

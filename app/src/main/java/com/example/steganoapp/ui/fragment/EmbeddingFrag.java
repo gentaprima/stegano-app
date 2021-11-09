@@ -1,23 +1,46 @@
 package com.example.steganoapp.ui.fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.steganoapp.R;
+import com.example.steganoapp.impl.IEmbedding;
+import com.example.steganoapp.model.GlobalResponse;
+import com.example.steganoapp.obj.EmbedObject;
+import com.example.steganoapp.ui.embedding.EmbeddingViewModel;
+import com.example.steganoapp.utils.DialogClass;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import static com.example.steganoapp.helper.Helper.encode;
+import static com.example.steganoapp.helper.Helper.getRealPathFromURI;
 
 
-public class EmbeddingFrag extends Fragment implements View.OnClickListener {
+public class EmbeddingFrag extends Fragment implements View.OnClickListener , Observer<GlobalResponse>, IEmbedding {
     EditText fileName,secretMessage,password,confirmPassword;
     Button btnBrowse,btnHide,btnCancel;
+    ActivityResultLauncher<Intent> resultIntent;
+     android.app.AlertDialog alertDialog;
+    EmbeddingViewModel embeddingViewModel;
+    String base64 = "";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -30,11 +53,31 @@ public class EmbeddingFrag extends Fragment implements View.OnClickListener {
         btnBrowse = view.findViewById(R.id.browse_file);
         btnHide  = view.findViewById(R.id.hide_button);
         btnCancel = view.findViewById(R.id.cancel_button);
-//        btnCancel.setOnClickListener(this);
-        btnHide.setOnClickListener(this);
-        btnBrowse.setOnClickListener(this);
+        embeddingViewModel = ViewModelProviders.of(this).get(EmbeddingViewModel.class);
         return view;
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        btnCancel.setOnClickListener(this);
+        btnHide.setOnClickListener(this);
+        btnBrowse.setOnClickListener(this);
+        resultIntent = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    Uri uri = result.getData() !=null ? result.getData().getData() :null;
+                    assert uri != null;
+                    File file = new File(getRealPathFromURI(this.requireContext(),uri));
+                    fileName.setText(file.getName());
+                    try {
+                        base64 = encode(file);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+    }
+
 
     @Override
     public void onStart() {
@@ -47,12 +90,27 @@ public class EmbeddingFrag extends Fragment implements View.OnClickListener {
         super.onResume();
     }
 
+
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.browse_file:
+                Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
+                resultIntent.launch(intent);
+                break;
             case R.id.hide_button:
-                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
-                startActivity(intent);
+                View v = getLayoutInflater().inflate(R.layout.loading_alert,null,false);
+                alertDialog = DialogClass.dialog(getContext(),v).create();
+                alertDialog.show();
+                if(!password.getText().equals(confirmPassword.getText())){
+                    Toast.makeText(getContext(), "Password dan konfirmasi password tidak sesuai!" ,Toast.LENGTH_SHORT).show();
+                    alertDialog.dismiss();
+                    break;
+                }else{
+                    EmbedObject embedObject = new EmbedObject(base64,secretMessage.getText().toString(),password.getText().toString());
+                    onEmbeddingText(embedObject,"hide");
+                }
                 break;
 //            case R.id.cancel_button:
 //                break;
@@ -60,5 +118,20 @@ public class EmbeddingFrag extends Fragment implements View.OnClickListener {
 //                break;
             default:
         }
+    }
+
+
+
+    @Override
+    public void onChanged(GlobalResponse globalResponse) {
+        String message =  globalResponse.getMessage();
+        alertDialog.dismiss();
+        Toast.makeText(getContext(), message ,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onEmbeddingText(EmbedObject embedObject,String type) {
+        embeddingViewModel.setEmbedding(embedObject,type);
+        embeddingViewModel.getEmbeddingLiveData().observe(this.getViewLifecycleOwner(),this);
     }
 }

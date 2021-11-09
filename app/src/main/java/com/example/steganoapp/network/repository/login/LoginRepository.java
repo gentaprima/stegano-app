@@ -1,6 +1,4 @@
-package com.example.steganoapp.network.repository.users;
-
-import android.util.Log;
+package com.example.steganoapp.network.repository.login;
 
 import androidx.lifecycle.MutableLiveData;
 
@@ -25,7 +23,6 @@ public class LoginRepository {
         requestOrder.enqueue(new Callback<ResponseLogin>() {
             @Override
             public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
-                System.out.println(response.body());
                 if(response.body() != null){
 
                     responseLoginMutableLiveData.postValue(response.body());

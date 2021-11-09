@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.steganoapp.R;
 import com.example.steganoapp.session.SystemDataLocal;
+import com.example.steganoapp.ui.embedding.EmbeddingActivity;
 import com.example.steganoapp.ui.users.ProfileActivity;
 import com.example.steganoapp.utils.SwitchActivity;
 
