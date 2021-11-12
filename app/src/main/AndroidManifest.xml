@@ -34,7 +34,8 @@
         android:networkSecurityConfig="@xml/network_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SteganoApp">
+        android:theme="@style/Theme.SteganoApp"
+        tools:targetApi="n">
         <activity
             android:name=".ui.users.ProfileActivity"
             android:exported="false" />
@@ -44,20 +45,18 @@
         <activity
             android:name=".ui.users.LoginActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustNothing">
-
-        </activity>
-        <activity
-            android:name=".ui.HomeActivity"
-            android:exported="false" />
-        <activity android:name=".ui.embedding.EmbeddingActivity"
-            android:windowSoftInputMode="adjustNothing">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.HomeActivity"
+            android:exported="false" />
+        <activity android:name=".ui.embedding.EmbeddingActivity"
+            android:windowSoftInputMode="adjustNothing"/>
     </application>
 
 </manifest>

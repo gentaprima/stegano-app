@@ -22,11 +22,10 @@ public class EmbedRepository {
 
     public MutableLiveData<GlobalResponse> embedding(EmbedObject embedObject,String type) {
         final MutableLiveData<GlobalResponse> globalResponseMutableLiveData = new MutableLiveData<>();
-        Call<GlobalResponse> requestOrder = apiInterface.embedding(embedObject.getMp3(), embedObject.getSecretMessage(), embedObject.getPassword(), type);
+        Call<GlobalResponse> requestOrder = apiInterface.embedding(embedObject.getMp3(), embedObject.getSecretMessage(), embedObject.getPassword(),embedObject.getUsersID(), type);
         requestOrder.enqueue(new Callback<GlobalResponse>() {
             @Override
             public void onResponse(@NonNull Call<GlobalResponse> call, @NonNull Response<GlobalResponse> response) {
-                System.out.println(response.raw().request().url());
                 if (response.body() != null) {
                     globalResponseMutableLiveData.postValue(response.body());
                 } else {

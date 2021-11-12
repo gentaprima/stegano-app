@@ -17,5 +17,5 @@ public interface ApiInterface {
                                   @Field("password") String password);
     @FormUrlEncoded
     @POST("stegano.php?")
-    Call<GlobalResponse> embedding(@Field("mp3")String mp3, @Field("secret_message") String secretMessage, @Field("password")String password, @Query("type") String type);
+    Call<GlobalResponse> embedding(@Field("mp3")String mp3, @Field("secret_message") String secretMessage, @Field("password")String password,@Field("users_id") String usersID, @Query("type") String type);
 }

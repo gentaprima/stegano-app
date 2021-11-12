@@ -20,16 +20,20 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.steganoapp.R;
+import com.example.steganoapp.helper.Helper;
 import com.example.steganoapp.impl.IEmbedding;
 import com.example.steganoapp.model.GlobalResponse;
 import com.example.steganoapp.obj.EmbedObject;
+import com.example.steganoapp.session.SystemDataLocal;
 import com.example.steganoapp.ui.embedding.EmbeddingViewModel;
 import com.example.steganoapp.utils.DialogClass;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Objects;
 
+import static com.example.steganoapp.helper.Helper.ApiURL;
 import static com.example.steganoapp.helper.Helper.encode;
 import static com.example.steganoapp.helper.Helper.getRealPathFromURI;
 
@@ -41,6 +45,7 @@ public class EmbeddingFrag extends Fragment implements View.OnClickListener , Ob
      android.app.AlertDialog alertDialog;
     EmbeddingViewModel embeddingViewModel;
     String base64 = "";
+    SystemDataLocal systemDataLocal;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,6 +64,7 @@ public class EmbeddingFrag extends Fragment implements View.OnClickListener , Ob
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        systemDataLocal = new SystemDataLocal(getContext());
         btnCancel.setOnClickListener(this);
         btnHide.setOnClickListener(this);
         btnBrowse.setOnClickListener(this);
@@ -103,17 +109,20 @@ public class EmbeddingFrag extends Fragment implements View.OnClickListener , Ob
                 View v = getLayoutInflater().inflate(R.layout.loading_alert,null,false);
                 alertDialog = DialogClass.dialog(getContext(),v).create();
                 alertDialog.show();
-                if(!password.getText().equals(confirmPassword.getText())){
+                if(!password.getText().toString().equals(confirmPassword.getText().toString())){
                     Toast.makeText(getContext(), "Password dan konfirmasi password tidak sesuai!" ,Toast.LENGTH_SHORT).show();
                     alertDialog.dismiss();
                     break;
                 }else{
-                    EmbedObject embedObject = new EmbedObject(base64,secretMessage.getText().toString(),password.getText().toString());
-                    onEmbeddingText(embedObject,"hide");
+                    EmbedObject embedObject = new EmbedObject(base64,secretMessage.getText().toString(),password.getText().toString(),systemDataLocal.getLoginData().getId());
+                    if(embedObject.isValid()){
+                        onEmbeddingText(embedObject,"hide");
+                    }
                 }
                 break;
-//            case R.id.cancel_button:
-//                break;
+            case R.id.cancel_button:
+                getActivity().finish();
+                break;
 //            case R.id.browse_file :
 //                break;
             default:
@@ -126,7 +135,10 @@ public class EmbeddingFrag extends Fragment implements View.OnClickListener , Ob
     public void onChanged(GlobalResponse globalResponse) {
         String message =  globalResponse.getMessage();
         alertDialog.dismiss();
+        System.out.println(globalResponse.getFileName());
         Toast.makeText(getContext(), message ,Toast.LENGTH_SHORT).show();
+        Helper.downloadFile(requireContext(),ApiURL+"steganofile/"+globalResponse.getFileName(),globalResponse.getFileName());
+
     }
 
     @Override
@@ -134,4 +146,6 @@ public class EmbeddingFrag extends Fragment implements View.OnClickListener , Ob
         embeddingViewModel.setEmbedding(embedObject,type);
         embeddingViewModel.getEmbeddingLiveData().observe(this.getViewLifecycleOwner(),this);
     }
+
+
 }

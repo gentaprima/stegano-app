@@ -1,5 +1,7 @@
 package com.example.steganoapp.network.api;
 
+import com.example.steganoapp.helper.Helper;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -8,7 +10,7 @@ public class ApiClient {
 
     public  static  Retrofit getClient(){
         if(retrofit == null){
-            retrofit = new Retrofit.Builder().baseUrl("http://192.168.0.8/steganografi/")
+            retrofit = new Retrofit.Builder().baseUrl(Helper.ApiURL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

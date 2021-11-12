@@ -1,5 +1,6 @@
 package com.example.steganoapp.helper;
 
+import android.app.DownloadManager;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
@@ -15,6 +16,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class Helper {
+    static public String ApiURL = "http://192.168.0.6/steganografi/";
     static public String getRealPathFromURI(Context context, Uri contentUri) {
         Cursor cursor = null;
         try {
@@ -49,5 +51,16 @@ public class Helper {
         FileOutputStream os = new FileOutputStream(file, true);
         os.write(decoded);
         os.close();
+    }
+
+    static  public  void downloadFile(Context context,String url,String fileName){
+        DownloadManager downloadmanager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+        Uri uri = Uri.parse(url);
+        DownloadManager.Request request = new DownloadManager.Request(uri);
+        request.setTitle(fileName);
+        request.setDescription("Ouput Stegano");
+         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,"game-of-life");
+        downloadmanager.enqueue(request);
     }
 }
