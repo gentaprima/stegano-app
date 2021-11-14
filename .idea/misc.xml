@@ -3,11 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/genta/AndroidStudioProjects/SteganoApp/app/src/main/res/drawable/border_input.xml" value="0.22552083333333334" />
         <entry key="..\:/Users/genta/AndroidStudioProjects/SteganoApp/app/src/main/res/layout/activity_embedding.xml" value="0.209375" />
         <entry key="..\:/Users/genta/AndroidStudioProjects/SteganoApp/app/src/main/res/layout/activity_extraction.xml" value="0.1953125" />
         <entry key="..\:/Users/genta/AndroidStudioProjects/SteganoApp/app/src/main/res/layout/activity_home.xml" value="0.209375" />
         <entry key="..\:/Users/genta/AndroidStudioProjects/SteganoApp/app/src/main/res/layout/activity_main.xml" value="0.209375" />
         <entry key="..\:/Users/genta/AndroidStudioProjects/SteganoApp/app/src/main/res/layout/activity_profile.xml" value="0.25" />
+        <entry key="..\:/Users/genta/AndroidStudioProjects/SteganoApp/app/src/main/res/layout/dialog_download.xml" value="0.209375" />
         <entry key="..\:/Users/genta/AndroidStudioProjects/SteganoApp/app/src/main/res/layout/fragment_embedding_menu.xml" value="0.209375" />
         <entry key="..\:/Users/genta/AndroidStudioProjects/SteganoApp/app/src/main/res/layout/fragment_extraction.xml" value="0.209375" />
         <entry key="..\:/project/stegano-app/app/src/main/res/drawable/bg_btnlogin.xml" value="0.19087837837837837" />

@@ -1,5 +1,6 @@
 package com.example.steganoapp.ui.fragment;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -46,6 +47,8 @@ public class EmbeddingFrag extends Fragment implements View.OnClickListener , Ob
     EmbeddingViewModel embeddingViewModel;
     String base64 = "";
     SystemDataLocal systemDataLocal;
+    AlertDialog.Builder builder;
+    View myview;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -102,7 +105,7 @@ public class EmbeddingFrag extends Fragment implements View.OnClickListener , Ob
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.browse_file:
-                Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
+                Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Audio.Media.INTERNAL_CONTENT_URI);
                 resultIntent.launch(intent);
                 break;
             case R.id.hide_button:
@@ -137,14 +140,42 @@ public class EmbeddingFrag extends Fragment implements View.OnClickListener , Ob
         alertDialog.dismiss();
         System.out.println(globalResponse.getFileName());
         Toast.makeText(getContext(), message ,Toast.LENGTH_SHORT).show();
-        Helper.downloadFile(requireContext(),ApiURL+"steganofile/"+globalResponse.getFileName(),globalResponse.getFileName());
+        displayDialog(globalResponse);
 
     }
+
 
     @Override
     public void onEmbeddingText(EmbedObject embedObject,String type) {
         embeddingViewModel.setEmbedding(embedObject,type);
         embeddingViewModel.getEmbeddingLiveData().observe(this.getViewLifecycleOwner(),this);
+    }
+
+    private void displayDialog(GlobalResponse globalResponse){
+        builder = new AlertDialog.Builder(getContext());
+        myview = getLayoutInflater().inflate(R.layout.dialog_download,null,false);
+        builder.setView(myview);
+        Button btnDownload = myview.findViewById(R.id.btn_download);
+        Button btnBack = myview.findViewById(R.id.btn_back);
+        AlertDialog alertDialog = builder.show();
+        btnDownload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Helper.downloadFile(requireContext(),ApiURL+"steganofile/"+globalResponse.getFileName(),globalResponse.getFileName());
+                Toast.makeText(getContext(),"Media sedang didownload ...",Toast.LENGTH_LONG).show();
+                alertDialog.dismiss();
+            }
+        });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+
+
+
     }
 
 

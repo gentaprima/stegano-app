@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.steganoapp.R;
 import com.example.steganoapp.session.SystemDataLocal;
 import com.example.steganoapp.ui.embedding.EmbeddingActivity;
+import com.example.steganoapp.ui.extraction.ExtractionActivity;
 import com.example.steganoapp.ui.users.ProfileActivity;
 import com.example.steganoapp.utils.SwitchActivity;
 
@@ -45,7 +46,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.cardExtraction:
-                SwitchActivity.mainSwitch(this,ExtractionActivity.class);
+                SwitchActivity.mainSwitch(this, ExtractionActivity.class);
                 break;
 
             case R.id.iv_profile:

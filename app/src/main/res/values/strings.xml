@@ -16,4 +16,6 @@
     <string name="cancel">Cancel</string>
     <string name="read_file">Read File</string>
     <string name="fullname">Fullname</string>
+    <string name="download">Download</string>
+    <string name="back">Back</string>
 </resources>

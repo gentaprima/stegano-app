@@ -1,4 +1,4 @@
-package com.example.steganoapp.ui;
+package com.example.steganoapp.ui.extraction;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;

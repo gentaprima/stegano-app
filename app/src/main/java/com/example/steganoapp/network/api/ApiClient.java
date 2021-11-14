@@ -1,6 +1,8 @@
 package com.example.steganoapp.network.api;
 
 import com.example.steganoapp.helper.Helper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

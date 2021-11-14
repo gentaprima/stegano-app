@@ -16,13 +16,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class Helper {
-    static public String ApiURL = "http://192.168.0.6/steganografi/";
+    static public String ApiURL = "http://192.168.1.19/steganografi/";
     static public String getRealPathFromURI(Context context, Uri contentUri) {
         Cursor cursor = null;
         try {
-            String[] proj = { MediaStore.Images.Media.DATA };
+            String[] proj = { MediaStore.Audio.Media.DATA };
             cursor = context.getContentResolver().query(contentUri,  proj, null, null, null);
-            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
             cursor.moveToFirst();
             return cursor.getString(column_index);
         } finally {

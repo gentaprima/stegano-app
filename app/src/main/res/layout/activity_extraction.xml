@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.ExtractionActivity">
+    tools:context=".ui.extraction.ExtractionActivity">
     <include layout="@layout/app_bar"
         android:layout_width="match_parent" android:layout_height="wrap_content"/>
 
