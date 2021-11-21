@@ -2,11 +2,14 @@ package com.example.steganoapp.ui.fragment;
 
 import static com.example.steganoapp.helper.Helper.encode;
 import static com.example.steganoapp.helper.Helper.getRealPathFromURI;
+import static com.example.steganoapp.helper.Helper.getRealPathFromURImage;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
@@ -24,6 +27,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,14 +43,19 @@ import com.example.steganoapp.ui.extraction.ExtractionActivity;
 import com.example.steganoapp.ui.extraction.ExtractionViewModel;
 import com.example.steganoapp.utils.DialogClass;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Objects;
-
+import org.apache.commons.io.IOUtils;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import org.apache.commons.*;
 
 public class ExtractionFrag extends Fragment implements View.OnClickListener {
 
@@ -65,7 +74,7 @@ public class ExtractionFrag extends Fragment implements View.OnClickListener {
     Button btnBrowse,btnRead;
     private ExtractionViewModel extractionViewModel;
     SystemDataLocal systemDataLocal;
-    ActivityResultLauncher<Intent> resultIntent;
+    ActivityResultLauncher<String> resultIntent;
     android.app.AlertDialog alertDialog;
     EditText fileName,edtPassword,secretMessage;
     File file;
@@ -74,6 +83,7 @@ public class ExtractionFrag extends Fragment implements View.OnClickListener {
     private String mediaPath;
     private String postPath;
     ExtractionActivity activity = (ExtractionActivity) getContext();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -96,85 +106,38 @@ public class ExtractionFrag extends Fragment implements View.OnClickListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         systemDataLocal = new SystemDataLocal(getContext());
-        resultIntent = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                Uri uri = result.getData() !=null ? result.getData().getData() :null;
-                assert uri != null;
-                file = new File(getRealPathFromURI(this.requireContext(),uri));
-                fileName.setText(file.getName());
-            });
+        resultIntent = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
+            @Override
+            public void onActivityResult(Uri o) {
+                String[] data = getRealPathFromURImage(requireContext(),o);
+                String name = data[0];
+                fileName.setText(name);
+                ContentResolver contentResolver = requireContext().getContentResolver();
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                try {
+                    AssetFileDescriptor descriptor = contentResolver.openAssetFileDescriptor(o,"r");
+                    assert descriptor != null;
+                    InputStream is = descriptor.createInputStream();
+                    File tempFile = File.createTempFile("prefix", "suffix",requireContext().getCacheDir());
+                    tempFile.deleteOnExit();
+                    FileOutputStream out = new FileOutputStream(tempFile);
+                    IOUtils.copy(is, out);
+                    file = tempFile;
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
-
-//    private void requestPermision() {
-//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-//            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},REQUES_WRITE_PERMISION);
-//        }else{
-//            saveImageUpload();
-//        }
-//    }
-
-//    private void saveImageUpload() {
-//        if(mediaPath == null){
-//            Toast.makeText(getContext(),"Pilih Gambar terlebih dahulu ...", Toast.LENGTH_LONG).show();
-//        }else{
-//            final File imageFile = new File(mediaPath);
-//            String password = "google123";
-//            RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-file"),imageFile);
-//            final MultipartBody.Part partImage = MultipartBody.Part.createFormData("mp3",imageFile.getName(),requestBody);
-//            try {
-//                extractionViewModel.extractData(partImage,RequestBody.create(MediaType.parse("text-plain"),password), "show").observe(this, new Observer<MessageOnly>() {
-//                    @Override
-//                    public void onChanged(MessageOnly messageOnly) {
-//                        System.out.println(messageOnly.getMessage());
-//                    }
-//                });
-//            }catch (Exception e){
-//                System.out.println(e.getMessage());
-//            }
-//
-//        }
-//    }
-
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if(resultCode == activity.RESULT_OK){
-//            if(requestCode == REQUEST_PICK_PHOTO){
-//                if(data != null){
-//                    Uri selectedFile = data.getData();
-//                    String[] filePathColumn = {MediaStore.Images.Media.DATA};
-//                    Cursor cursor = getContext().getContentResolver().query(selectedFile,filePathColumn,null,null,null);
-//                    if(cursor != null){
-//                        cursor.moveToFirst();
-//                        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-//                        mediaPath = cursor.getString(columnIndex);
-//                        final File file = new File(mediaPath);
-//                        fileName.setText(file.getName());
-//                    }
-//                }
-//            }
-//        }
-//    }
-
-
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-//            saveImageUpload();
-//        }
-//    }
-
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.browse_file:
-                Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Audio.Media.INTERNAL_CONTENT_URI);
-                resultIntent.launch(intent);
-//                Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//                startActivityForResult(gallery,REQUEST_PICK_PHOTO);
+                resultIntent.launch("audio/*");
                 break;
-
             case R.id.btnRead:
                 View view = getLayoutInflater().inflate(R.layout.loading_alert,null,false);
                 alertDialog = DialogClass.dialog(getContext(),view).create();
@@ -194,7 +157,7 @@ public class ExtractionFrag extends Fragment implements View.OnClickListener {
                             @Override
                             public void onChanged(MessageOnly messageOnly) {
                                 if(messageOnly.getStatus()){
-                                    Toast.makeText(getContext(),messageOnly.getMessage(),Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getContext(),"Berhasil mengambil secret message",Toast.LENGTH_LONG).show();
                                     secretMessage.setText(messageOnly.getMessage());
                                     alertDialog.dismiss();
                                 }else{

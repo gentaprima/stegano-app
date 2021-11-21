@@ -15,7 +15,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class Helper {
-    static public String ApiURL = "http://192.168.100.30/steganografi/";
+    static public String ApiURL = "http://192.168.0.9/steganografi/";
 
     static public String getRealPathFromURI(Context context, Uri contentUri) {
         Cursor cursor = null;
@@ -37,10 +37,11 @@ public class Helper {
         try {
             String[] proj = {MediaStore.Images.Media.DATA, MediaStore.Images.Media.DISPLAY_NAME};
             cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
-            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DISPLAY_NAME);
+            assert cursor != null;
+            int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DISPLAY_NAME);
             int indexData = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             cursor.moveToFirst();
-            return new String[]{cursor.getString(column_index), cursor.getString(indexData)};
+            return new String[]{cursor.getString(columnIndex), cursor.getString(indexData)};
         } finally {
             if (cursor != null) {
                 cursor.close();

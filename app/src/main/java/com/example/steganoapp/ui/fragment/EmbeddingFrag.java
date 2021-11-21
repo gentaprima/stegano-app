@@ -3,11 +3,7 @@ package com.example.steganoapp.ui.fragment;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.res.AssetFileDescriptor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -35,13 +30,11 @@ import com.example.steganoapp.ui.embedding.EmbeddingViewModel;
 import com.example.steganoapp.utils.DialogClass;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
 import static com.example.steganoapp.helper.Helper.ApiURL;
-import static com.example.steganoapp.helper.Helper.encode;
 import static com.example.steganoapp.helper.Helper.getRealPathFromURI;
 
 
@@ -79,12 +72,16 @@ public class EmbeddingFrag extends Fragment implements View.OnClickListener, Obs
         btnHide.setOnClickListener(this);
         btnBrowse.setOnClickListener(this);
         resultIntent = registerForActivityResult(new ActivityResultContracts.GetContent(), result -> {
+            if(result==null ){
+               return;
+            }
             String name = getRealPathFromURI(requireContext(),result);
             fileName.setText(name);
             ContentResolver contentResolver = requireContext().getContentResolver();
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             try {
                 AssetFileDescriptor descriptor = contentResolver.openAssetFileDescriptor(result,"r");
+                assert descriptor != null;
                 InputStream is = descriptor.createInputStream();
                 byte[] buf = new byte[1024];
                 int n;
@@ -93,30 +90,12 @@ public class EmbeddingFrag extends Fragment implements View.OnClickListener, Obs
                 }
                 byte[] videoBytes = baos.toByteArray();
                 base64 = Base64.encodeToString(videoBytes,0);
-                System.out.println(base64);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            //                System.out.println(re);
-//                File file = new File(getRealPathFromURI(requireContext(),result));
-//                System.out.println(file.getName());
         });
-//        resultIntent = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-//                result -> {
-//                    Uri uri = result.getData() !=null ? result.getData().getData() :null;
-//                    assert uri != null;
-//                    File file = new File(getRealPathFromURI(this.requireContext(),uri));
-//                    fileName.setText(file.getName());
-//                    try {
-//                        base64 = encode(file);
-//                    } catch (FileNotFoundException e) {
-//                        e.printStackTrace();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                });
     }
 
 
