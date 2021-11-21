@@ -1,19 +1,16 @@
 package com.example.steganoapp.ui.fragment;
 
-import static com.example.steganoapp.helper.Helper.encode;
-import static com.example.steganoapp.helper.Helper.getRealPathFromURI;
-import static com.example.steganoapp.helper.Helper.getRealPathFromURImage;
-
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
-import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -22,40 +19,27 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.provider.MediaStore;
-import android.util.Base64;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
-
 import com.example.steganoapp.R;
-import com.example.steganoapp.model.GlobalResponse;
 import com.example.steganoapp.model.MessageOnly;
 import com.example.steganoapp.session.SystemDataLocal;
-import com.example.steganoapp.ui.extraction.ExtractionActivity;
 import com.example.steganoapp.ui.extraction.ExtractionViewModel;
 import com.example.steganoapp.utils.DialogClass;
 
-import java.io.ByteArrayOutputStream;
+import org.apache.commons.io.IOUtils;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Objects;
-import org.apache.commons.io.IOUtils;
+
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import org.apache.commons.*;
+
+import static com.example.steganoapp.helper.Helper.getRealPathFromURImage;
 
 public class ExtractionFrag extends Fragment implements View.OnClickListener {
 
@@ -78,12 +62,6 @@ public class ExtractionFrag extends Fragment implements View.OnClickListener {
     android.app.AlertDialog alertDialog;
     EditText fileName,edtPassword,secretMessage;
     File file;
-    private final int REQUEST_PICK_PHOTO = 2;
-    private final int REQUES_WRITE_PERMISION = 786;
-    private String mediaPath;
-    private String postPath;
-    ExtractionActivity activity = (ExtractionActivity) getContext();
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -113,7 +91,6 @@ public class ExtractionFrag extends Fragment implements View.OnClickListener {
                 String name = data[0];
                 fileName.setText(name);
                 ContentResolver contentResolver = requireContext().getContentResolver();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 try {
                     AssetFileDescriptor descriptor = contentResolver.openAssetFileDescriptor(o,"r");
                     assert descriptor != null;
