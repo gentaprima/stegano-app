@@ -75,6 +75,9 @@
                 android:layout_height="35dp"
                 android:background="@drawable/border_input"
                 android:layout_marginTop="6dp"
+                android:paddingStart="@dimen/margin_activity_small"
+                tools:ignore="RtlCompat"
+                android:id="@+id/tv_name"
                 />
             <TextView
                 android:layout_marginTop="@dimen/margin_activity_small"
@@ -154,7 +157,9 @@
                 android:layout_height="35dp"
                 android:background="@drawable/border_input"
                 android:layout_marginTop="6dp"
-                />
+                android:id="@+id/old_password"
+                android:paddingStart="@dimen/margin_activity_small"
+                tools:ignore="RtlCompat" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -172,6 +177,9 @@
                 android:layout_height="35dp"
                 android:background="@drawable/border_input"
                 android:layout_marginTop="6dp"
+                android:id="@+id/new_password"
+                android:paddingStart="@dimen/margin_activity_small"
+                tools:ignore="RtlCompat"
                 />
 
             <TextView
@@ -185,7 +193,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginTop="6dp"
-                android:background="@drawable/border_input" />
+                android:background="@drawable/border_input"
+                android:id="@+id/confirm_password"
+                android:paddingStart="@dimen/margin_activity_small"
+                tools:ignore="RtlCompat"
+                />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -200,6 +212,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/border_input"
                 android:text="Update Data"
+                android:id="@+id/btn_update_password"
                 android:layout_marginTop="@dimen/margin_activity_small"
                 tools:ignore="HardcodedText" />
         </LinearLayout>
