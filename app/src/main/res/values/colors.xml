@@ -13,4 +13,5 @@
     <color name="transparent">#00FFFFFF</color>
     <color name="colorAccent">#FAAD0A</color>
     <color name="colorRed">#F44336</color>
+    <color name="colorBlack">#000</color>
 </resources>

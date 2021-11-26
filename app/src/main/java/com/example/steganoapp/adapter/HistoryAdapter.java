@@ -21,25 +21,19 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     private Context context;
     private List<DataHistory> listData;
-    private View.OnClickListener onClickListener;
-    private String fileName;
-    public  HistoryAdapter(){}
-    public HistoryAdapter(Context context, List<DataHistory> listData, View.OnClickListener onClickListener) {
-        this.context = context;
-        this.listData = listData;
-        this.onClickListener = onClickListener;
+    private OnItemClickCallBack onItemClickCallback;
+
+    public void setOnDownloadClickCallBack(OnItemClickCallBack onItemClickCallback){
+        this.onItemClickCallback = onItemClickCallback;
     }
+
+    public void setOnDeleteClickCallBack(OnItemClickCallBack onItemClickCallback){
+        this.onItemClickCallback = onItemClickCallback;
+    }
+
     public HistoryAdapter(Context context, List<DataHistory> listData) {
         this.context = context;
         this.listData = listData;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public String getFileName() {
-        return fileName;
     }
 
     @NonNull
@@ -54,8 +48,18 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         final DataHistory dataHistory = listData.get(position);
         holder.tv_date.setText(dataHistory.getDate());
         holder.tv_title.setText(dataHistory.getEmbeddingFile());
-        holder.btnDownload.setOnClickListener(onClickListener);
-        setFileName(dataHistory.getEmbeddingFile());
+        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickCallback.onItemClicked(dataHistory);
+            }
+        });
+        holder.btnDownload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickCallback.onItemClicked(dataHistory);
+            }
+        });
     }
 
     @Override
@@ -66,13 +70,17 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_date;
         TextView tv_title;
-        ImageButton btnDownload;
+        ImageButton btnDownload,btnDelete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_title = itemView.findViewById(R.id.file_name);
             tv_date = itemView.findViewById(R.id.tv_date);
             btnDownload = itemView.findViewById(R.id.btn_download);
+            btnDelete = itemView.findViewById(R.id.btn_delete);
         }
+    }
+    public interface OnItemClickCallBack{
+        void onItemClicked(DataHistory dataHistory);
     }
 }

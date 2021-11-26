@@ -53,4 +53,8 @@ public interface ApiInterface {
                                      @Field("new_password")String newPassword,
                                      @Field("confirm_password")String confirmPassword,
                                      @Query("type")String type);
+
+    @GET
+    Call<MessageOnly> deleteHistory(@Query("type")String type,
+                                    @Query("id")String id);
 }
