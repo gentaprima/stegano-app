@@ -29,6 +29,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         SystemDataLocal systemDataLocal = new SystemDataLocal(this);
         tvName = findViewById(R.id.tv_name);
         ivProfile = findViewById(R.id.iv_profile);
+        ivProfile.setVisibility(View.GONE);
         cardEmbed = findViewById(R.id.btn_embed);
         cardEmbed.setOnClickListener(this);
         cardExtraction = findViewById(R.id.cardExtraction);

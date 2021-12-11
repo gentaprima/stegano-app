@@ -54,7 +54,7 @@ public interface ApiInterface {
                                      @Field("confirm_password")String confirmPassword,
                                      @Query("type")String type);
 
-    @GET
+    @GET("history.php?")
     Call<MessageOnly> deleteHistory(@Query("type")String type,
                                     @Query("id")String id);
 }

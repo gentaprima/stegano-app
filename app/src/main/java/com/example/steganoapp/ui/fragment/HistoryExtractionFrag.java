@@ -69,7 +69,7 @@ public class HistoryExtractionFrag extends Fragment  implements  View.OnClickLis
                 RecyclerView.LayoutManager lm = new LinearLayoutManager(getContext());
                 rvData.setAdapter(historyAdapter);
                 rvData.setLayoutManager(lm);
-                historyAdapter.setOnDownloadClickCallBack(new HistoryAdapter.OnItemClickCallBack() {
+                historyAdapter.setOnDownloadClickCallBack(new HistoryAdapter.OnItemDownloadClickCallBack() {
                     @Override
                     public void onItemClicked(DataHistory dataHistory) {
                         displaDialogDownload(dataHistory);
@@ -118,6 +118,8 @@ public class HistoryExtractionFrag extends Fragment  implements  View.OnClickLis
             @Override
             public void onClick(View v) {
                 deleteHistoryViewModel.deleteHistory("del",dataHistory.getId());
+                alertDialog.dismiss();
+                loadDataHistory();
             }
         });
     }

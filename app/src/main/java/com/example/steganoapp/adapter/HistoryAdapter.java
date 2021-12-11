@@ -22,9 +22,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     private Context context;
     private List<DataHistory> listData;
     private OnItemClickCallBack onItemClickCallback;
+    private OnItemDownloadClickCallBack onItemDownloadClickCallBack;
 
-    public void setOnDownloadClickCallBack(OnItemClickCallBack onItemClickCallback){
-        this.onItemClickCallback = onItemClickCallback;
+    public void setOnDownloadClickCallBack(OnItemDownloadClickCallBack onItemDownloadClickCallBack){
+        this.onItemDownloadClickCallBack = onItemDownloadClickCallBack;
     }
 
     public void setOnDeleteClickCallBack(OnItemClickCallBack onItemClickCallback){
@@ -57,7 +58,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         holder.btnDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onItemClickCallback.onItemClicked(dataHistory);
+                onItemDownloadClickCallBack.onItemClicked(dataHistory);
             }
         });
     }
@@ -81,6 +82,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         }
     }
     public interface OnItemClickCallBack{
+        void onItemClicked(DataHistory dataHistory);
+    }
+
+    public interface OnItemDownloadClickCallBack{
         void onItemClicked(DataHistory dataHistory);
     }
 }

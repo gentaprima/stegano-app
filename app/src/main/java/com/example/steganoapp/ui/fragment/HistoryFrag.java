@@ -73,12 +73,13 @@ public class HistoryFrag extends Fragment {
                         displayDialogDelete(dataHistory);
                     }
                 });
-                historyAdapter.setOnDownloadClickCallBack(new HistoryAdapter.OnItemClickCallBack() {
+                historyAdapter.setOnDownloadClickCallBack(new HistoryAdapter.OnItemDownloadClickCallBack() {
                     @Override
                     public void onItemClicked(DataHistory dataHistory) {
                         displaDialogDownload(dataHistory);
                     }
                 });
+
             }
         });
     }
@@ -115,6 +116,8 @@ public class HistoryFrag extends Fragment {
             @Override
             public void onClick(View v) {
                 deleteHistoryViewModel.deleteHistory("del",dataHistory.getId());
+                alertDialog.dismiss();
+                loadData();
             }
         });
     }

@@ -9,6 +9,10 @@ import com.example.steganoapp.network.repository.DeleteHistoryRepository;
 public class DeleteHistoryViewModel extends ViewModel {
     private DeleteHistoryRepository deleteHistoryRepository;
 
+    public DeleteHistoryViewModel(){
+        deleteHistoryRepository = new DeleteHistoryRepository();
+    }
+
     public LiveData<MessageOnly> deleteHistory(String type,String id){
         return deleteHistoryRepository.deleteHistory(type,id);
     }
