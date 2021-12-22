@@ -29,7 +29,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-//        SystemDataLocal systemDataLocal = new SystemDataLocal(this);
+  SystemDataLocal systemDataLocal = new SystemDataLocal(this);
         tvName = findViewById(R.id.tv_name);
         ivProfile = findViewById(R.id.iv_profile);
         ivProfile.setVisibility(View.GONE);
@@ -41,7 +41,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         cardLogout.setOnClickListener(this);
         tvName.setText(systemDataLocal.getLoginData().getName());
         ivProfile.setOnClickListener(this);
-        systemDataLocal = new SystemDataLocal(this);
+//        systemDataLocal = new SystemDataLocal(this);
     }
 
     @SuppressLint("NonConstantResourceId")

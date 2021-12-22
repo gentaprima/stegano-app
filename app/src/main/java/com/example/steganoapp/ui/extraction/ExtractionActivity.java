@@ -51,6 +51,7 @@ public class ExtractionActivity extends AppCompatActivity implements View.OnClic
     SystemDataLocal systemDataLocal;
     ActivityResultLauncher<String> resultIntent;
     android.app.AlertDialog alertDialog;
+
     EditText fileName,edtPassword,secretMessage;
     File file;
     @SuppressLint("SetTextI18n")
@@ -73,6 +74,9 @@ public class ExtractionActivity extends AppCompatActivity implements View.OnClic
         resultIntent = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
             @Override
             public void onActivityResult(Uri o) {
+                if(o==null ){
+                    return;
+                }
                 String[] data = getRealPathFromURImage(getApplicationContext(),o);
                 String name = data[0];
                 fileName.setText(name);
@@ -128,7 +132,7 @@ public class ExtractionActivity extends AppCompatActivity implements View.OnClic
             case R.id.btnRead:
                 View view = getLayoutInflater().inflate(R.layout.loading_alert,null,false);
                 alertDialog = DialogClass.dialog(getApplicationContext(),view).create();
-                alertDialog.show();
+//                alertDialog.show();
                 if(file == null){
                     Toast.makeText(getApplicationContext(),"Pilih Media terlebih dahulu ...", Toast.LENGTH_LONG).show();
                     alertDialog.dismiss();

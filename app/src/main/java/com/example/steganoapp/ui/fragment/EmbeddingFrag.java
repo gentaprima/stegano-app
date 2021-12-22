@@ -147,7 +147,9 @@ public class EmbeddingFrag extends Fragment implements View.OnClickListener, Obs
         alertDialog.dismiss();
         String message = globalResponse.getMessage();
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-        displayDialog(globalResponse);
+        if(globalResponse.getStatus()){
+            displayDialog(globalResponse);
+        }
 
     }
 
