@@ -153,12 +153,15 @@
                         tools:ignore="HardcodedText" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.cardview.widget.CardView><androidx.cardview.widget.CardView
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
                 android:layout_marginTop="@dimen/margin_default"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 app:cardBackgroundColor="@color/colorPrimary"
-                app:cardCornerRadius="20dp">
+                app:cardCornerRadius="20dp"
+                android:id="@+id/cardLogout"
+                >
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
