@@ -72,6 +72,7 @@ public class EmbeddingFrag extends Fragment implements View.OnClickListener, Obs
         btnHide.setOnClickListener(this);
         btnBrowse.setOnClickListener(this);
         resultIntent = registerForActivityResult(new ActivityResultContracts.GetContent(), result -> {
+
             if(result==null ){
                return;
             }
@@ -83,13 +84,20 @@ public class EmbeddingFrag extends Fragment implements View.OnClickListener, Obs
                 AssetFileDescriptor descriptor = contentResolver.openAssetFileDescriptor(result,"r");
                 assert descriptor != null;
                 InputStream is = descriptor.createInputStream();
+
                 byte[] buf = new byte[1024];
                 int n;
                 while (-1 != (n = is.read(buf))) {
                     baos.write(buf, 0, n);
+
                 }
                 byte[] videoBytes = baos.toByteArray();
                 base64 = Base64.encodeToString(videoBytes,0);
+                if(videoBytes.length > 2000000){
+                    fileName.setText("");
+                    Toast.makeText(getContext(),"File harus kurang dari 2mb",Toast.LENGTH_LONG).show();
+                    base64 = "";
+                }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -144,6 +152,7 @@ public class EmbeddingFrag extends Fragment implements View.OnClickListener, Obs
 
     @Override
     public void onChanged(GlobalResponse globalResponse) {
+
         alertDialog.dismiss();
         String message = globalResponse.getMessage();
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();

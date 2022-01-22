@@ -15,7 +15,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class Helper {
-    static public String ApiURL = "http://192.168.0.151/steganografi/";
+    static public String ApiURL = "https://www.stegano.sobat-tech.com/";
 
     static public String getRealPathFromURI(Context context, Uri contentUri) {
         Cursor cursor = null;

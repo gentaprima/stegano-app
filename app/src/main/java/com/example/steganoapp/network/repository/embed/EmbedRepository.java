@@ -21,11 +21,13 @@ public class EmbedRepository {
     }
 
     public MutableLiveData<GlobalResponse> embedding(EmbedObject embedObject,String type) {
+        System.out.println("oke");
         final MutableLiveData<GlobalResponse> globalResponseMutableLiveData = new MutableLiveData<>();
+        System.out.println(embedObject.getMp3());
         Call<GlobalResponse> requestOrder = apiInterface.embedding(embedObject.getMp3(), embedObject.getSecretMessage(), embedObject.getPassword(),embedObject.getUsersID(), type);
         requestOrder.enqueue(new Callback<GlobalResponse>() {
             @Override
-            public void onResponse(@NonNull Call<GlobalResponse> call, @NonNull Response<GlobalResponse> response) {
+            public void onResponse( Call<GlobalResponse> call, Response<GlobalResponse> response) {
                 if (response.body() != null) {
                     globalResponseMutableLiveData.postValue(response.body());
                 } else {
@@ -34,7 +36,7 @@ public class EmbedRepository {
             }
 
             @Override
-            public void onFailure(@NonNull Call<GlobalResponse> call, @NonNull Throwable t) {
+            public void onFailure( Call<GlobalResponse> call,  Throwable t) {
                 globalResponseMutableLiveData.postValue(null);
             }
         });
