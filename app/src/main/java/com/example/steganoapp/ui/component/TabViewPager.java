@@ -17,7 +17,7 @@ import com.example.steganoapp.ui.fragment.HistoryFrag;
 public class TabViewPager extends FragmentPagerAdapter {
 
     private Context context;
-    public final static String title[]= {"Embedding","History"};
+    public final static String title[]= {"Enkripsi","Riwayat"};
 
     public TabViewPager(@NonNull FragmentManager fm,Context context) {
         super(fm);

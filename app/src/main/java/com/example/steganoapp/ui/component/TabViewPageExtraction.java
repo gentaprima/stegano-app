@@ -16,7 +16,7 @@ import com.example.steganoapp.ui.fragment.HistoryFrag;
 
 public class TabViewPageExtraction extends FragmentPagerAdapter {
     private Context context;
-    public  final static String title[] = {"Extraction","History"};
+    public  final static String title[] = {"Deskripsi","Riwayat"};
 
     public TabViewPageExtraction(@NonNull FragmentManager fm,Context context){
         super(fm);
@@ -37,7 +37,7 @@ public class TabViewPageExtraction extends FragmentPagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        Fragment fragment =null;
+        Fragment fragment;
         switch (position) {
             case 0:
                 fragment = Fragment.instantiate(context, ExtractionFrag.class.getName());

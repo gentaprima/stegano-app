@@ -28,14 +28,14 @@ public class EmbeddingActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
         toolbarTitle = findViewById(R.id.toolbar_title);
-        tabLayout.addTab(tabLayout.newTab().setText("Embedding"));
-        tabLayout.addTab(tabLayout.newTab().setText("History"));
+        tabLayout.addTab(tabLayout.newTab().setText("Enkripsi"));
+        tabLayout.addTab(tabLayout.newTab().setText("Riwayat"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final TabViewPager tabViewPager = new TabViewPager(getSupportFragmentManager(),this);
         viewPager.setAdapter(tabViewPager);
         tabLayout.setupWithViewPager(viewPager);
-        toolbarTitle.setText(TabViewPager.title[0]);
+        toolbarTitle.setText("Enkripsi");
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

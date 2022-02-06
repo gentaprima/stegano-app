@@ -37,7 +37,7 @@
         />
 
     <EditText
-        android:hint="Personal Number"
+        android:hint="Nomor Personal"
         android:paddingLeft="@dimen/margin_default"
         android:layout_width="match_parent"
         android:layout_height="45dp"
@@ -52,22 +52,23 @@
         tools:ignore="HardcodedText,RtlHardcoded,RtlSymmetry,TextFields"
         android:importantForAutofill="no" />
 
-    <EditText
-        android:id="@+id/edt_password"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:textColor="@color/colorWhite"
-        android:layout_marginStart="@dimen/margin_default"
-        android:layout_marginTop="@dimen/margin_default"
-        android:layout_marginEnd="@dimen/margin_default"
-        android:background="@drawable/input"
-        android:hint="Password"
-        android:importantForAutofill="no"
-        android:inputType="textPassword"
-        android:paddingLeft="@dimen/margin_default"
-        android:textColorHint="#ACABAB"
-        tools:ignore="HardcodedText,RtlHardcoded,RtlSymmetry,TextFields" />
-    <RelativeLayout
+        <EditText
+            android:id="@+id/edt_password"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginStart="@dimen/margin_default"
+            android:layout_marginTop="@dimen/margin_default"
+            android:layout_marginEnd="@dimen/margin_default"
+            android:background="@drawable/input"
+            android:hint="Kata Sandi"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:paddingLeft="@dimen/margin_default"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="#ACABAB"
+            tools:ignore="HardcodedText,RtlHardcoded,RtlSymmetry,TextFields" />
+
+        <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageButton

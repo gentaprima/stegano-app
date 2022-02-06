@@ -1,20 +1,20 @@
 <resources>
     <string name="app_name">SteganoApp</string>
-    <string name="welcome">Welcome</string>
+    <string name="welcome">Selamat Datang</string>
     <string name="silahkan_tunggu">Silahkan Tunggu ...</string>
     <string name="embed">embed</string>
     <string name="extrack">extrack</string>
     <string name="logout">logout</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="browse_file">Browse File</string>
-    <string name="hint_secret_message">Write The Secret Message</string>
+    <string name="browse_file">File</string>
+    <string name="hint_secret_message">Tuliskan Kode E-budgeting</string>
     <string name="encryption">Encryption</string>
-    <string name="password">Password</string>
-    <string name="confirm_password">Confirm \n Password</string>
-    <string name="hide">Hide</string>
-    <string name="cancel">Cancel</string>
-    <string name="read_file">Read File</string>
+    <string name="password">Kata Sandi</string>
+    <string name="confirm_password">Konfirmasi \n Kata Sandi</string>
+    <string name="hide">Sembunyikan</string>
+    <string name="cancel">Batalkan</string>
+    <string name="read_file">Baca File</string>
     <string name="fullname">Fullname</string>
     <string name="download">Download</string>
     <string name="back">Back</string>
